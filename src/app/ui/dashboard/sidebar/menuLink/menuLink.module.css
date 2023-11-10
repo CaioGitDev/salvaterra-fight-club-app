@@ -1,0 +1,7 @@
+.container {
+  @apply p-5 flex items-center gap-3 hover:bg-gray-400
+}
+
+.active{
+  @apply bg-gray-400
+}

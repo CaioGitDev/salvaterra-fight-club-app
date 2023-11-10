@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+}
+
+.menu {
+  flex: 1;
+  @apply bg-gray-300 p-5 text-gray-900;
+}
+
+.content {
+  flex: 4;
+  @apply bg-gray-800 p-5;
+}

@@ -1,0 +1,29 @@
+.container {
+  position: sticky;
+  @apply top-10
+}
+
+.logo{
+  @apply flex items-center gap-5 mb-5
+}
+
+.logo_image {
+  border-radius: 50%;
+  @apply object-cover
+}
+
+.logo_detail{
+  @apply flex flex-col
+}
+
+.logo_name{
+  @apply font-bold
+}
+
+.logo_description {
+  @apply text-sm text-gray-500
+}
+
+.category {
+  @apply text-xs text-gray-500 font-bold mt-5 mb-3
+}
