@@ -9,5 +9,5 @@
 
 .content {
   flex: 4;
-  @apply bg-gray-800 p-5;
+  @apply bg-gray-100 p-5 text-gray-900;
 }
