@@ -1,6 +1,5 @@
 .container {
-  position: sticky;
-  @apply top-10
+  @apply top-10 h-screen sticky
 }
 
 .logo{
@@ -26,4 +25,8 @@
 
 .category {
   @apply text-xs text-gray-500 font-bold mt-5 mb-3
+}
+
+.logout { 
+  @apply p-5 mt-1 mb-1 flex items-center gap-2 cursor-pointer rounded-lg w-full hover:bg-gray-400 hover:text-gray-300
 }

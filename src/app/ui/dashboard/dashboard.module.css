@@ -1,13 +1,11 @@
 .container {
-  display: flex;
+  @apply flex;
 }
 
 .menu {
-  flex: 1;
-  @apply bg-gray-300 p-5 text-gray-900;
+  @apply bg-gray-300 p-5 text-gray-900 flex-1;
 }
 
 .content {
-  flex: 4;
-  @apply bg-gray-100 p-5 text-gray-900;
+  @apply bg-gray-100 p-5 text-gray-900 overflow-hidden flex-[4];
 }

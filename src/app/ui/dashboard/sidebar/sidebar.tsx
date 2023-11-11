@@ -7,6 +7,7 @@ import {
   MdGroups,
   MdOutlineCreditCard,
   MdOutlineCalendarMonth,
+  MdLogout,
 } from 'react-icons/md'
 import MenuLink from './menuLink/menuLink'
 import Image from 'next/image'
@@ -79,6 +80,11 @@ const SideBar = () => {
           </li>
         ))}
       </ul>
+
+      <button className={styles.logout}>
+        <MdLogout />
+        Logout
+      </button>
     </div>
   )
 }

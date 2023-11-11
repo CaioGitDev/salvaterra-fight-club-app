@@ -19,16 +19,13 @@ const Navbar = () => {
           <input type="text" placeholder='Search...' className={styles.input} />
         </div>
         <div className={styles.user}>
-        <Image className={styles.user_image} src={userImage} alt="" width={50} height={50} />
-        <div className={styles.user_detail}>
-          <span className={styles.user_name}>Salvaterra Fight Club</span>
-          <span className={styles.user_description}>Artes Marciais e Desportos de Combate</span>
+          <Image className={styles.user_image} src={userImage} alt="" width={50} height={50} />
+          <div className={styles.user_detail}>
+            <span className={styles.user_name}>Caio Rosa</span>
+          </div>
         </div>
-      </div>
         <div className={styles.icons}>
-          <MdOutlineChat size={20} />
           <MdNotifications size={20} />
-          <MdPublic size={20} />
         </div>
       </div>
     </div>
