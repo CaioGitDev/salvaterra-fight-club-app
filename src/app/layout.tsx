@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import './ui/globals.css'
-
+import Navbar from './ui/navbar/navbar'
+import SideBar from './ui/sidebar/sidebar'
+import styles from './ui/layout.module.css'
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,7 +18,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <div className={styles.container}>
+          <div className={styles.menu}>
+            <SideBar />
+          </div>
+          <div className={styles.content}>
+            <Navbar />
+            {children}
+          </div>
+        </div>
+      </body>
     </html>
   )
 }

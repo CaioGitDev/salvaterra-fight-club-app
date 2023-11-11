@@ -16,15 +16,15 @@
 }
 
 .logo_name{
-  @apply font-bold
+  @apply text-primary-color font-bold text-lg
 }
 
 .logo_description {
-  @apply text-sm text-gray-500
+  @apply text-sm text-gray-400
 }
 
 .category {
-  @apply text-xs text-gray-500 font-bold mt-5 mb-3
+  @apply text-xs text-gray-400 font-bold mt-5 mb-3
 }
 
 .logout { 
