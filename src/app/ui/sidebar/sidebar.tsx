@@ -17,7 +17,7 @@ import LogoImage from '../../../../public/images/logo.svg'
 const menuItems = [
   {
     id: randomUUID(),
-    title: 'Menu',
+    title: 'MENU',
     list: [
       {
         id: randomUUID(),
@@ -27,15 +27,15 @@ const menuItems = [
       },
       {
         id: randomUUID(),
-        title: 'Equipas',
-        path: '/teams',
-        icon: <MdGroups />,
-      },
-      {
-        id: randomUUID(),
         title: 'Utilizadores',
         path: '/users',
         icon: <MdSupervisedUserCircle />,
+      },
+      {
+        id: randomUUID(),
+        title: 'Equipas',
+        path: '/teams',
+        icon: <MdGroups />,
       },
       {
         id: randomUUID(),
@@ -53,7 +53,7 @@ const menuItems = [
   },
   {
     id: randomUUID(),
-    title: 'Teams',
+    title: 'EQUIPAS',
     list: [],
   },
 ]

@@ -7,5 +7,5 @@
 }
 
 .content {
-  @apply bg-secondary-color p-5 text-primary-text-light overflow-hidden flex-[4];
+  @apply bg-secondary-color text-primary-text-light overflow-hidden flex-[4];
 }

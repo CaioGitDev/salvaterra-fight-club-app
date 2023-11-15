@@ -1,6 +1,3 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
 import styles from './navbar.module.css'
 import {
   MdNotifications,
@@ -13,33 +10,36 @@ import Image from 'next/image'
 import userImage from '../../../../public/images/caio.svg'
 
 const Navbar = () => {
-  const pathName = usePathname()
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>{pathName.split('/').pop()}</div>
-
-      <div className={styles.menu}>
+    <nav className={styles.navbar}>
+      <div className={styles.container}>
+        {/* pesquisa */}
         <div className={styles.search}>
-          <MdSearch />
-          <input type="text" placeholder="Search..." className={styles.input} />
-        </div>
-        <div className={styles.user}>
-          <Image
-            className={styles.user_image}
-            src={userImage}
-            alt=""
-            width={50}
-            height={50}
-          />
-          <div className={styles.user_detail}>
-            <span className={styles.user_name}>Caio Rosa</span>
+          <input
+            className={styles.search_input}
+            type="search"
+            placeholder="Pesquisar atleta..."
+            name="search"
+          ></input>
+          <div className={styles.search_icon}>
+            <MdSearch size={20} />
           </div>
         </div>
-        <div className={styles.icons}>
-          <MdNotifications size={20} />
+        {/* user */}
+        <div className={styles.user}>
+          <div className={styles.user_data}>
+            <Image
+              className={styles.user_data_avatar}
+              src={userImage}
+              alt="user avatar"
+              width={42}
+              height={42}
+            />
+            <div className={styles.user_data_name}>Caio Rosa</div>
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   )
 }
 
