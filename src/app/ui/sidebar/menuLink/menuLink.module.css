@@ -1,8 +1,8 @@
 .container {
-  @apply p-5 flex items-center gap-3 hover:bg-gray-400 hover:text-gray-300
-  mt-1 mb-1 rounded-lg
+  @apply p-5 flex items-center gap-3 hover:bg-quaternary-color hover:text-primary-color
+  mt-1 mb-1 
 }
 
 .active{
-  @apply bg-gray-400 text-gray-300
+  @apply bg-quaternary-color text-primary-color
 }

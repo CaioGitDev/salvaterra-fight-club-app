@@ -1,9 +1,9 @@
 .container {
-  @apply top-10 h-screen sticky
+  @apply top-10  h-screen sticky border-r-[1px] border-tertiary-color
 }
 
 .logo{
-  @apply flex items-center gap-5 mb-5
+  @apply flex p-5 items-center gap-5 mb-5 border-b-[1px] border-tertiary-color
 }
 
 .logo_image {
@@ -24,9 +24,9 @@
 }
 
 .category {
-  @apply text-xs text-gray-400 font-bold mt-5 mb-3
+  @apply text-xs text-gray-400 font-bold mt-5 mb-3 p-5
 }
 
 .logout { 
-  @apply p-5 mt-1 mb-1 flex items-center gap-2 cursor-pointer rounded-lg w-full hover:bg-gray-400 hover:text-gray-300
+  @apply p-5 mt-1 mb-1 flex items-center gap-2 cursor-pointer hover:bg-quaternary-color hover:text-primary-color w-full
 }

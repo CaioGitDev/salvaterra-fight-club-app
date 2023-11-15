@@ -3,7 +3,7 @@
 }
 
 .menu {
-  @apply bg-secondary-color p-5 text-primary-text-light flex-1;
+  @apply bg-secondary-color  text-primary-text-light flex-1;
 }
 
 .content {
