@@ -64,12 +64,12 @@
   color: #d9d9d9;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-theme-generic-typography input,
 .dx-theme-generic-typography textarea {
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-theme-generic-typography .dx-font-xl,
@@ -1724,7 +1724,7 @@
   color: #d9d9d9;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-widget,
@@ -1748,7 +1748,7 @@
 }
 .dx-widget input,
 .dx-widget textarea {
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-state-disabled .dx-widget,
@@ -1832,14 +1832,14 @@
   color: #d9d9d9;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
   min-height: 36px;
   padding: 0;
 }
 .dx-field input,
 .dx-field textarea {
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-field-value.dx-attention {
@@ -4279,7 +4279,7 @@
   color: #d9d9d9;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-overlay-wrapper,
@@ -4316,7 +4316,7 @@
 }
 .dx-overlay-wrapper input,
 .dx-overlay-wrapper textarea {
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-popup-wrapper .dx-state-focused.dx-overlay-content {
@@ -8952,7 +8952,7 @@
   color: #d9d9d9;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-menu-base .dx-menu-item-wrapper,
@@ -9063,7 +9063,7 @@
 }
 .dx-menu-base input,
 .dx-menu-base textarea {
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-menu-base.dx-state-focused {
@@ -13821,12 +13821,12 @@
   color: #d9d9d9;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-datagrid-column-chooser input,
 .dx-datagrid-column-chooser textarea {
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-datagrid-column-chooser.dx-datagrid-column-chooser-mode-drag .dx-popup-content {
@@ -15901,12 +15901,12 @@ input.dx-hidden {
   color: #d9d9d9;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-treelist-column-chooser input,
 .dx-treelist-column-chooser textarea {
-  font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
+  font-family: Roboto,"Segoe UI",helvetica,verdana,sans-serif;
   line-height: 1.35715;
 }
 .dx-treelist-column-chooser.dx-treelist-column-chooser-mode-drag .dx-popup-content {
