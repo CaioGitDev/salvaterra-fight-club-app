@@ -143,7 +143,7 @@ const membersData: MemberData[] = [
 const UsersPage = () => {
   return (
     <div suppressHydrationWarning className="dx-viewport p-5">
-      <h2 className="pb-5">Lista de membros</h2>
+      <h1 className="pb-5">Lista de membros</h1>
       <div className={styles.container}>
         <DataGrid
           dataSource={membersData}
@@ -157,15 +157,18 @@ const UsersPage = () => {
           <Scrolling mode="virtual" />
           <Editing
             mode="popup"
-            useIcons={false}
+            useIcons={true}
             allowAdding={true}
-            allowUpdating={false}
-            allowDeleting={false}
+            allowUpdating={true}
+            allowDeleting={true}
           >
             <Popup title="Membro" showTitle={true} width="90vw" height="80vh" />
             <Form>
               <GroupItem caption="Identificação" colCount={2} colSpan={2}>
-                <Item dataField="fullName"></Item>
+                <Item
+                  dataField="fullName"
+                  label={{ text: 'Nome Completo', location: 'top' }}
+                ></Item>
               </GroupItem>
             </Form>
           </Editing>
