@@ -1,36 +1,35 @@
 'use client'
-import Form from '@/app/ui/users/form/form'
 import styles from '@/app/ui/users/users.module.css'
 
-import '@/app/ui/theme/css/dx.generic.salvaterra-fight-club-theme.css'
+import '@/app/ui/theme/dx.generic.salvaterra-fight-club-theme.css'
 import { UUID } from 'crypto'
 
 import DataGrid, {
   Column,
+  Editing,
+  FilterRow,
   Grouping,
   GroupPanel,
+  HeaderFilter,
   Pager,
   Paging,
+  Scrolling,
   SearchPanel,
+  Popup,
+  Form,
 } from 'devextreme-react/data-grid'
+import { GroupItem, Item } from 'devextreme-react/form'
 
 const pageSizes = [10, 25, 50, 100]
 
-enum identificationDocumentTypes {
-  'Cartão de Cidadão',
-  'Passaporte',
-  'Cartão de residência',
-  'Outro',
-}
+type identificationDocumentTypes =
+  | 'Cartão de Cidadão'
+  | 'Passaporte'
+  | 'Cartão de residência'
+  | 'Outro'
 
-enum relationshipDegreeTypes {
-  'Mãe',
-  'Pai',
-  'Irmão',
-  'Irmã',
-  'Avó',
-  'Avô',
-}
+type relationshipDegreeTypes = 'Mãe' | 'Pai' | 'Irmão' | 'Irmã' | 'Avó' | 'Avô'
+
 const memberDataColumns = [
   'membershipNumber',
   'fullName',
@@ -41,6 +40,7 @@ const memberDataColumns = [
   'identificationDocument',
   'identificationNumber',
 ]
+
 type MemberData = {
   id?: UUID
   membershipNumber?: number
@@ -85,7 +85,7 @@ const membersData: MemberData[] = [
     dateOfBirth: new Date(),
     nationality: 'Portuguese',
     placeOfBirth: 'Lisbon',
-    identificationDocument: identificationDocumentTypes['Cartão de Cidadão'],
+    identificationDocument: 'Cartão de Cidadão',
     identificationNumber: '123456789',
     expireDate: new Date(),
     taxIdentificationNumber: '987654321',
@@ -99,7 +99,7 @@ const membersData: MemberData[] = [
     guardian: {
       fullName: 'Maria Silva',
       contact: '+351 987 654 321',
-      relationshipDegree: relationshipDegreeTypes['Mãe'],
+      relationshipDegree: 'Irmã',
       address: 'Rua XYZ, 456',
       city: 'Lisbon',
       county: 'Lisbon',
@@ -116,7 +116,7 @@ const membersData: MemberData[] = [
     dateOfBirth: new Date(),
     nationality: 'Portuguese',
     placeOfBirth: 'Porto',
-    identificationDocument: identificationDocumentTypes.Passaporte,
+    identificationDocument: 'Cartão de residência',
     identificationNumber: '987654321',
     expireDate: new Date(),
     taxIdentificationNumber: '123456789',
@@ -130,7 +130,7 @@ const membersData: MemberData[] = [
     guardian: {
       fullName: 'Carlos Pereira',
       contact: '+351 123 456 789',
-      relationshipDegree: relationshipDegreeTypes.Pai,
+      relationshipDegree: 'Pai',
       address: 'Avenida XYZ, 789',
       city: 'Porto',
       county: 'Porto',
@@ -143,12 +143,33 @@ const membersData: MemberData[] = [
 const UsersPage = () => {
   return (
     <div suppressHydrationWarning className="dx-viewport p-5">
+      <h2 className="pb-5">Lista de membros</h2>
       <div className={styles.container}>
         <DataGrid
           dataSource={membersData}
+          keyExpr="id"
           defaultColumns={memberDataColumns}
           showBorders={true}
-        />
+        >
+          <FilterRow visible={true} />
+          <HeaderFilter visible={true} />
+          <GroupPanel visible={true} />
+          <Scrolling mode="virtual" />
+          <Editing
+            mode="popup"
+            useIcons={false}
+            allowAdding={true}
+            allowUpdating={false}
+            allowDeleting={false}
+          >
+            <Popup title="Membro" showTitle={true} width="90vw" height="80vh" />
+            <Form>
+              <GroupItem caption="Identificação" colCount={2} colSpan={2}>
+                <Item dataField="fullName"></Item>
+              </GroupItem>
+            </Form>
+          </Editing>
+        </DataGrid>
       </div>
     </div>
   )
