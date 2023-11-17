@@ -5,20 +5,16 @@ import '@/app/ui/theme/dx.generic.salvaterra-fight-club-theme.css'
 import { UUID } from 'crypto'
 
 import DataGrid, {
-  Column,
   Editing,
   FilterRow,
-  Grouping,
   GroupPanel,
   HeaderFilter,
-  Pager,
-  Paging,
   Scrolling,
-  SearchPanel,
   Popup,
   Form,
 } from 'devextreme-react/data-grid'
-import { GroupItem, Item } from 'devextreme-react/form'
+import { Item } from 'devextreme-react/form'
+import DataSource from 'devextreme/data/data_source'
 
 const pageSizes = [10, 25, 50, 100]
 
@@ -31,14 +27,14 @@ type identificationDocumentTypes =
 type relationshipDegreeTypes = 'Mãe' | 'Pai' | 'Irmão' | 'Irmã' | 'Avó' | 'Avô'
 
 const memberDataColumns = [
-  'membershipNumber',
-  'fullName',
-  'gender',
-  'dateOfBirth',
-  'nationality',
-  'placeOfBirth',
-  'identificationDocument',
-  'identificationNumber',
+  { dataField: 'membershipNumber', caption: 'Nº Socio' },
+  { dataField: 'fullName', caption: 'Nome Completo' },
+  { dataField: 'gender', caption: 'Genero' },
+  { dataField: 'dateOfBirth', caption: 'Data Nasc.' },
+  { dataField: 'nationality', caption: 'Nacionalidade' },
+  { dataField: 'placeOfBirth', caption: 'Local de Nasc.' },
+  { dataField: 'identificationDocument', caption: 'Doc. Identificação' },
+  { dataField: 'identificationNumber', caption: 'Nº de Identificação' },
 ]
 
 type MemberData = {
@@ -140,6 +136,14 @@ const membersData: MemberData[] = [
   },
 ]
 
+const genreDataSource = new DataSource({
+  store: {
+    data: [{ id: 1, text: 'Homem' }],
+    type: 'array',
+    key: 'id',
+  },
+})
+
 const UsersPage = () => {
   return (
     <div suppressHydrationWarning className="dx-viewport p-5">
@@ -164,12 +168,23 @@ const UsersPage = () => {
           >
             <Popup title="Membro" showTitle={true} width="90vw" height="80vh" />
             <Form>
-              <GroupItem caption="Identificação" colCount={2} colSpan={2}>
+              <Item
+                itemType="group"
+                caption="Identificação"
+                colCount={2}
+                colSpan={2}
+              >
                 <Item
                   dataField="fullName"
                   label={{ text: 'Nome Completo', location: 'top' }}
-                ></Item>
-              </GroupItem>
+                />
+                <Item
+                  dataField="gender"
+                  label={{ text: 'Genero', location: 'top' }}
+                  editorType="dxSelectBox"
+                  editorOptions={{ items: ['Homem', 'Mulher', 'Outro'] }}
+                />
+              </Item>
             </Form>
           </Editing>
         </DataGrid>
