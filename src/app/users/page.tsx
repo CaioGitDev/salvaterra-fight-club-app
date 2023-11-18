@@ -184,6 +184,41 @@ const UsersPage = () => {
                   editorType="dxSelectBox"
                   editorOptions={{ items: ['Homem', 'Mulher', 'Outro'] }}
                 />
+                <Item
+                  dataField="dateOfBirth"
+                  editorType="dxDateBox"
+                  editorOptions={{
+                    format: 'date',
+                    displayFormat: 'yyyy-MM-dd',
+                    openOnFieldClick: true,
+                    pickerType: 'calendar',
+                  }}
+                  label={{ text: 'Data Nascimento', location: 'top' }}
+                />
+                <Item
+                  dataField="nationality"
+                  label={{ text: 'Nacionalidade', location: 'top' }}
+                />
+                <Item
+                  dataField="placeOfBirth"
+                  label={{ text: 'Naturalidade', location: 'top' }}
+                />
+                <Item
+                  dataField="identificationDocument"
+                  label={{
+                    text: 'Documento de identificação',
+                    location: 'top',
+                  }}
+                  editorType="dxSelectBox"
+                  editorOptions={{
+                    items: [
+                      'Cartão de Cidadão',
+                      'Passaporte',
+                      'Cartão de residência',
+                      'Outro',
+                    ],
+                  }}
+                />
               </Item>
             </Form>
           </Editing>
