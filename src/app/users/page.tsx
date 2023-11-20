@@ -1,6 +1,6 @@
 'use client'
 import styles from '@/app/ui/users/users.module.css'
-
+import { differenceInYears } from 'date-fns'
 import '@/app/ui/theme/dx.generic.salvaterra-fight-club-theme.css'
 import { UUID } from 'crypto'
 
@@ -12,11 +12,12 @@ import DataGrid, {
   Scrolling,
   Popup,
   Form,
+  EmailRule,
+  RequiredRule,
+  PatternRule,
 } from 'devextreme-react/data-grid'
 import { Item } from 'devextreme-react/form'
-import DataSource from 'devextreme/data/data_source'
-
-const pageSizes = [10, 25, 50, 100]
+import { useState } from 'react'
 
 type identificationDocumentTypes =
   | 'Cartão de Cidadão'
@@ -136,15 +137,15 @@ const membersData: MemberData[] = [
   },
 ]
 
-const genreDataSource = new DataSource({
-  store: {
-    data: [{ id: 1, text: 'Homem' }],
-    type: 'array',
-    key: 'id',
-  },
-})
-
 const UsersPage = () => {
+  const [guardionPanel, setGuardianPanel] = useState(true)
+  const handleBirthDateChange = (dateOfBirthSelected: string) => {
+    const dateOfBirthDate = new Date(dateOfBirthSelected)
+    const today = new Date()
+
+    setGuardianPanel(!(differenceInYears(today, dateOfBirthDate) <= 18))
+  }
+
   return (
     <div suppressHydrationWarning className="dx-viewport p-5">
       <h1 className="pb-5">Lista de membros</h1>
@@ -154,6 +155,7 @@ const UsersPage = () => {
           keyExpr="id"
           defaultColumns={memberDataColumns}
           showBorders={true}
+          height={700}
         >
           <FilterRow visible={true} />
           <HeaderFilter visible={true} />
@@ -167,7 +169,8 @@ const UsersPage = () => {
             allowDeleting={true}
           >
             <Popup title="Membro" showTitle={true} width="90vw" height="80vh" />
-            <Form>
+            <Form showValidationSummary={true}>
+              {/* dados pessoais */}
               <Item
                 itemType="group"
                 caption="Identificação"
@@ -175,35 +178,119 @@ const UsersPage = () => {
                 colSpan={2}
               >
                 <Item
+                  isRequired={true}
                   dataField="fullName"
                   label={{ text: 'Nome Completo', location: 'top' }}
-                />
+                >
+                  <RequiredRule message="Name is required" />
+                  <PatternRule
+                    message="Do not use digits in the Name"
+                    pattern={/^[^0-9]+$/}
+                  />
+                </Item>
                 <Item
+                  isRequired={true}
                   dataField="gender"
                   label={{ text: 'Genero', location: 'top' }}
                   editorType="dxSelectBox"
                   editorOptions={{ items: ['Homem', 'Mulher', 'Outro'] }}
                 />
                 <Item
+                  isRequired={true}
                   dataField="dateOfBirth"
                   editorType="dxDateBox"
                   editorOptions={{
-                    format: 'date',
+                    // format: 'date',
                     displayFormat: 'yyyy-MM-dd',
                     openOnFieldClick: true,
                     pickerType: 'calendar',
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    onValueChanged: (e: any) => {
+                      console.log(e.value)
+                      handleBirthDateChange(e.value)
+                    },
                   }}
                   label={{ text: 'Data Nascimento', location: 'top' }}
                 />
                 <Item
+                  isRequired={true}
                   dataField="nationality"
                   label={{ text: 'Nacionalidade', location: 'top' }}
+                  editorType="dxSelectBox"
+                  editorOptions={{
+                    items: [
+                      'Português',
+                      'Brasileiro',
+                      'Inglês',
+                      'Ucraniano',
+                      'Espanhol',
+                      'Alemão',
+                      'Marroquino',
+                      'Russo',
+                    ],
+                  }}
                 />
                 <Item
+                  isRequired={true}
                   dataField="placeOfBirth"
                   label={{ text: 'Naturalidade', location: 'top' }}
                 />
                 <Item
+                  dataField="email"
+                  label={{ text: 'Email', location: 'top' }}
+                >
+                  <RequiredRule message="Email is required" />
+                  <EmailRule message="Email is invalid" />
+                </Item>
+                <Item
+                  isRequired={true}
+                  dataField="contact"
+                  label={{ text: 'Nº Telemóvel', location: 'top' }}
+                ></Item>
+              </Item>
+
+              {/* dados morada */}
+              <Item itemType="group" caption="Morada" colCount={2} colSpan={2}>
+                <Item
+                  isRequired={true}
+                  dataField="address"
+                  label={{ text: 'Morada', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="city"
+                  label={{ text: 'Cidade', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="country"
+                  label={{ text: 'Concelho', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="parish"
+                  label={{ text: 'Freguesia', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="postalCode"
+                  label={{ text: 'Cod. Postal', location: 'top' }}
+                  editorOptions={{
+                    format: '#-###',
+                    mask: '0000-000',
+                  }}
+                />
+              </Item>
+
+              {/* identificação fiscal */}
+              <Item
+                itemType="group"
+                caption="Documento de Identificação"
+                colCount={2}
+                colSpan={2}
+              >
+                <Item
+                  isRequired={true}
                   dataField="identificationDocument"
                   label={{
                     text: 'Documento de identificação',
@@ -213,12 +300,55 @@ const UsersPage = () => {
                   editorOptions={{
                     items: [
                       'Cartão de Cidadão',
-                      'Passaporte',
+                      'Bilhete de identidade',
                       'Cartão de residência',
-                      'Outro',
+                      'Passaporte',
+                      'Autorização',
+                      'Título de residência',
                     ],
                   }}
                 />
+                <Item
+                  isRequired={true}
+                  dataField="identificationNumber"
+                  label={{ text: 'Nº Identificação', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="expireDate"
+                  label={{ text: 'Data de Validade', location: 'top' }}
+                  editorType="dxDateBox"
+                  editorOptions={{
+                    format: 'date',
+                    displayFormat: 'yyyy-MM-dd',
+                    openOnFieldClick: true,
+                    pickerType: 'calendar',
+                  }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="taxIdentificationNumber"
+                  label={{ text: 'Nº Identificação Fiscal', location: 'top' }}
+                  editorType="dxNumberBox"
+                  editorOptions={{
+                    value: null,
+                  }}
+                />
+              </Item>
+
+              {/* dados de um responsavel por menor */}
+              <Item
+                itemType="group"
+                caption="Responsável"
+                colCount={2}
+                colSpan={2}
+              >
+                <Item
+                  isRequired={true}
+                  dataField="guardian.fullName"
+                  label={{ text: 'Nome Responsável', location: 'top' }}
+                  disabled={guardionPanel}
+                ></Item>
               </Item>
             </Form>
           </Editing>
