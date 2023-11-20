@@ -1,6 +1,5 @@
 'use client'
 import styles from '@/app/ui/users/users.module.css'
-import { differenceInYears } from 'date-fns'
 import '@/app/ui/theme/dx.generic.salvaterra-fight-club-theme.css'
 import { UUID } from 'crypto'
 
@@ -17,7 +16,6 @@ import DataGrid, {
   PatternRule,
 } from 'devextreme-react/data-grid'
 import { Item } from 'devextreme-react/form'
-import { useState } from 'react'
 
 type identificationDocumentTypes =
   | 'Cartão de Cidadão'
@@ -138,14 +136,6 @@ const membersData: MemberData[] = [
 ]
 
 const UsersPage = () => {
-  const [guardionPanel, setGuardianPanel] = useState(true)
-  const handleBirthDateChange = (dateOfBirthSelected: string) => {
-    const dateOfBirthDate = new Date(dateOfBirthSelected)
-    const today = new Date()
-
-    setGuardianPanel(!(differenceInYears(today, dateOfBirthDate) <= 18))
-  }
-
   return (
     <div suppressHydrationWarning className="dx-viewport p-5">
       <h1 className="pb-5">Lista de membros</h1>
@@ -204,11 +194,6 @@ const UsersPage = () => {
                     displayFormat: 'yyyy-MM-dd',
                     openOnFieldClick: true,
                     pickerType: 'calendar',
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    onValueChanged: (e: any) => {
-                      console.log(e.value)
-                      handleBirthDateChange(e.value)
-                    },
                   }}
                   label={{ text: 'Data Nascimento', location: 'top' }}
                 />
@@ -344,11 +329,9 @@ const UsersPage = () => {
                 colSpan={2}
               >
                 <Item
-                  isRequired={true}
                   dataField="guardian.fullName"
                   label={{ text: 'Nome Responsável', location: 'top' }}
-                  disabled={guardionPanel}
-                ></Item>
+                />
               </Item>
             </Form>
           </Editing>
