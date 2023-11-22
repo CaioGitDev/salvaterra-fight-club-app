@@ -22,7 +22,7 @@ export type Member = {
 export type MemberIdentificationDocument = {
   id: string
   member_id: string
-  identificationDocument: string
+  identificationDocument_id: number
   identificationNumber: string
   expireDate: Date
   taxIdentificationNumber: number
@@ -31,7 +31,7 @@ export type MemberIdentificationDocument = {
   updatedBy?: string
 }
 
-export type MemberAdress = {
+export type MemberAddress = {
   id: string
   member_id: string
   address: string
@@ -55,6 +55,6 @@ export type MemberGuardian = {
 export interface MemberDataInterface {
   member: Member
   memberIdentificationDocument: MemberIdentificationDocument
-  memberAdress: MemberAdress
+  memberAddress: MemberAddress
   memberGuardian?: MemberGuardian
 }

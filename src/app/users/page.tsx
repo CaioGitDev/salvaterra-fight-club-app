@@ -14,7 +14,7 @@ import DataGrid, {
   Form,
   PatternRule,
 } from 'devextreme-react/data-grid'
-import { Item } from 'devextreme-react/form'
+import { EmailRule, Item, RequiredRule } from 'devextreme-react/form'
 import getColumnsDefinition from '@/lib/devExtreme/member-datagrid-columns-definition'
 
 type identificationDocumentTypes =
@@ -29,6 +29,22 @@ const datepickOptions = {
   displayFormat: 'yyyy-MM-dd',
   openOnFieldClick: true,
   pickerType: 'calendar',
+}
+
+const phoneNumberOptions = {
+  mask: '+351 000000000',
+  maskRules: {
+    X: /^\+3519[1236]\d{7}$/,
+  },
+  maskInvalidMessage: 'Número de telemovel deve ter o formato correto',
+}
+
+const postalCodeOptions = {
+  mask: '0000-000',
+  maskRules: {
+    X: /^\d{4}-\d{3}$/,
+  },
+  maskInvalidMessage: 'Código postal deve ter o formato correto',
 }
 
 const UsersPage = () => {
@@ -56,6 +72,7 @@ const UsersPage = () => {
           >
             <Popup title="Membro" showTitle={true} width="90vw" height="80vh" />
             <Form showValidationSummary={true}>
+              {/* identificação */}
               <Item
                 itemType="group"
                 caption="Identificação"
@@ -67,6 +84,7 @@ const UsersPage = () => {
                   dataField="member.fullName"
                   label={{ text: 'Nome Completo', location: 'top' }}
                 >
+                  <RequiredRule message="Nome is required" />
                   <PatternRule
                     message="Do not use digits in the Name"
                     pattern={/^[^0-9]+$/}
@@ -93,6 +111,94 @@ const UsersPage = () => {
                   editorType="dxSelectBox"
                   editorOptions={{
                     dataSource: serviceData.getNacionalitiesList(),
+                  }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="member.placeOfBirth"
+                  label={{ text: 'Naturalidade', location: 'top' }}
+                ></Item>
+                <Item
+                  dataField="member.email"
+                  label={{ text: 'Email', location: 'top' }}
+                >
+                  <RequiredRule message="Email is required" />
+                  <EmailRule message="Email is invalid" />
+                </Item>
+                <Item
+                  isRequired={true}
+                  dataField="member.contact"
+                  label={{ text: 'Nº Telemóvel', location: 'top' }}
+                  editorOptions={phoneNumberOptions}
+                ></Item>
+              </Item>
+              {/* dados morada */}
+              <Item itemType="group" caption="Morada" colCount={2} colSpan={2}>
+                <Item
+                  isRequired={true}
+                  dataField="memberAddress.address"
+                  label={{ text: 'Morada', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="memberAddress.city"
+                  label={{ text: 'Cidade', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="memberAddress.county"
+                  label={{ text: 'Concelho', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="memberAddress.parish"
+                  label={{ text: 'Freguesia', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="memberAddress.postalCode"
+                  label={{ text: 'Cod. Postal', location: 'top' }}
+                  editorOptions={postalCodeOptions}
+                ></Item>
+              </Item>
+              {/* identificação fiscal */}
+              <Item
+                itemType="group"
+                caption="Documento de Identificação"
+                colCount={2}
+                colSpan={2}
+              >
+                <Item
+                  isRequired={true}
+                  dataField="memberIdentificationDocument.identificationDocument_id"
+                  label={{
+                    text: 'Documento de identificação',
+                    location: 'top',
+                  }}
+                  editorType="dxSelectBox"
+                  editorOptions={{
+                    dataSource: serviceData.getIdentificationDocumentList(),
+                  }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="memberIdentificationDocument.identificationNumber"
+                  label={{ text: 'Nº Identificação', location: 'top' }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="memberIdentificationDocument.expireDate"
+                  label={{ text: 'Data de Validade', location: 'top' }}
+                  editorType="dxDateBox"
+                  editorOptions={{ datepickOptions }}
+                />
+                <Item
+                  isRequired={true}
+                  dataField="memberIdentificationDocument.taxIdentificationNumber"
+                  label={{ text: 'Nº Identificação Fiscal', location: 'top' }}
+                  editorType="dxNumberBox"
+                  editorOptions={{
+                    value: null,
                   }}
                 />
               </Item>

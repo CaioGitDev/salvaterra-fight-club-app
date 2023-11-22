@@ -21,7 +21,7 @@ const membersData: MemberDataInterface[] = [
     memberIdentificationDocument: {
       id: '1',
       member_id: '1',
-      identificationDocument: 'Passport',
+      identificationDocument_id: 2,
       identificationNumber: 'AB123456',
       expireDate: new Date('2025-01-15'),
       taxIdentificationNumber: 67890,
@@ -29,7 +29,7 @@ const membersData: MemberDataInterface[] = [
       updatedAt: new Date('2022-02-10'),
       updatedBy: 'admin',
     },
-    memberAdress: {
+    memberAddress: {
       id: '1',
       member_id: '1',
       address: '123 Main St',
@@ -46,7 +46,7 @@ const membersData: MemberDataInterface[] = [
       city: 'Lisbon',
       county: 'Lisbon',
       parish: 'Parish B',
-      postalCode: '54321-876',
+      postalCode: '5421-876',
     },
   },
   {
@@ -69,7 +69,7 @@ const membersData: MemberDataInterface[] = [
     memberIdentificationDocument: {
       id: '2',
       member_id: '2',
-      identificationDocument: 'ID Card',
+      identificationDocument_id: 4,
       identificationNumber: 'CD987654',
       expireDate: new Date('2024-08-20'),
       taxIdentificationNumber: 54321,
@@ -77,14 +77,14 @@ const membersData: MemberDataInterface[] = [
       updatedAt: new Date('2022-03-01'),
       updatedBy: 'admin',
     },
-    memberAdress: {
+    memberAddress: {
       id: '2',
       member_id: '2',
       address: '789 Oak St',
       city: 'New York',
       county: 'Manhattan',
       parish: 'Parish C',
-      postalCode: '67890-123',
+      postalCode: '6790-123',
     },
     // No guardian for this member
   },
@@ -140,10 +140,38 @@ const nacionalitiesList: OptionLists[] = [
   },
 ]
 
+const identificationDocumentList: OptionLists[] = [
+  {
+    id: 1,
+    text: 'Cartão de Cidadão',
+  },
+  {
+    id: 2,
+    text: 'Bilhete de identidade',
+  },
+  {
+    id: 3,
+    text: 'Cartão de residência',
+  },
+  {
+    id: 4,
+    text: 'Passaporte',
+  },
+  {
+    id: 5,
+    text: 'Autorização',
+  },
+  {
+    id: 6,
+    text: 'Título de residência',
+  },
+]
+
 export type ServiceDataType = {
   getMembers(): MemberDataInterface[]
   getGengerList(): OptionLists[]
   getNacionalitiesList(): OptionLists[]
+  getIdentificationDocumentList(): OptionLists[]
 }
 
 export const serviceData: ServiceDataType = {
@@ -155,5 +183,8 @@ export const serviceData: ServiceDataType = {
   },
   getNacionalitiesList() {
     return nacionalitiesList
+  },
+  getIdentificationDocumentList() {
+    return identificationDocumentList
   },
 }
