@@ -90,5 +90,53 @@ export default function getColumnsDefinition(serviceData: ServiceDataType) {
       dataField: 'memberIdentificationDocument.taxIdentificationNumber',
       visible: false,
     },
+
+    {
+      dataField: 'memberGuardian.fullName',
+      visible: false,
+    },
+    {
+      dataField: 'memberGuardian.contact',
+      visible: false,
+    },
+    {
+      dataField: 'memberGuardian.relationshipDegree_id',
+      visible: false,
+      lookup: {
+        dataSource: serviceData.getRelationshipDegreeListList(),
+        valueExpr: 'id',
+        displayExpr: 'text',
+      },
+    },
+    {
+      dataField: 'memberGuardian.address',
+      visible: false,
+    },
+    {
+      dataField: 'memberGuardian.city',
+      visible: false,
+    },
+    {
+      dataField: 'memberGuardian.county',
+      visible: false,
+    },
+    {
+      dataField: 'memberGuardian.parish',
+      visible: false,
+    },
+    {
+      dataField: 'memberGuardian.postalCode',
+      visible: false,
+    },
+    {
+      dataField: 'member.modality_id',
+      visible: true,
+      caption: 'Modalidade',
+      lookup: {
+        dataSource: serviceData.getModalitiesList(),
+        valueExpr: 'id',
+        displayExpr: 'text',
+      },
+    },
   ]
 }

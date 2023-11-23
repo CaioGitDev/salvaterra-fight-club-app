@@ -13,6 +13,7 @@ const membersData: MemberDataInterface[] = [
       placeOfBirth: 'Lisbon',
       contact: '123456789',
       email: 'john.doe@example.com',
+      modality_id: 3,
       createdAt: new Date('2022-01-01'),
       updatedAt: new Date('2022-02-15'),
       updatedBy: 'admin',
@@ -39,9 +40,11 @@ const membersData: MemberDataInterface[] = [
       postalCode: '12345-678',
     },
     memberGuardian: {
+      id: '1',
+      member_id: '1',
       fullName: 'Jane Doe',
       contact: '987654321',
-      relationshipDegree: 'Parent',
+      relationshipDegree_id: 2,
       address: '456 Broad St',
       city: 'Lisbon',
       county: 'Lisbon',
@@ -61,6 +64,7 @@ const membersData: MemberDataInterface[] = [
       placeOfBirth: 'New York',
       contact: '987654321',
       email: 'alice.smith@example.com',
+      modality_id: 2,
       createdAt: new Date('2022-01-05'),
       updatedAt: new Date('2022-02-20'),
       updatedBy: 'admin',
@@ -86,7 +90,6 @@ const membersData: MemberDataInterface[] = [
       parish: 'Parish C',
       postalCode: '6790-123',
     },
-    // No guardian for this member
   },
 ]
 
@@ -167,11 +170,55 @@ const identificationDocumentList: OptionLists[] = [
   },
 ]
 
+const relationshipDegreeList: OptionLists[] = [
+  {
+    id: 1,
+    text: 'Mãe',
+  },
+  {
+    id: 2,
+    text: 'Pai',
+  },
+  {
+    id: 3,
+    text: 'Irmão',
+  },
+  {
+    id: 4,
+    text: 'Irma',
+  },
+  {
+    id: 5,
+    text: 'Avó',
+  },
+  {
+    id: 6,
+    text: 'Avô',
+  },
+]
+
+const modalitiesList: OptionLists[] = [
+  {
+    id: 1,
+    text: 'Muay Thai',
+  },
+  {
+    id: 2,
+    text: 'Jiu-Jitsu',
+  },
+  {
+    id: 3,
+    text: 'Muay Thai/Jiu-Jitsu',
+  },
+]
+
 export type ServiceDataType = {
   getMembers(): MemberDataInterface[]
   getGengerList(): OptionLists[]
   getNacionalitiesList(): OptionLists[]
   getIdentificationDocumentList(): OptionLists[]
+  getRelationshipDegreeListList(): OptionLists[]
+  getModalitiesList(): OptionLists[]
 }
 
 export const serviceData: ServiceDataType = {
@@ -186,5 +233,11 @@ export const serviceData: ServiceDataType = {
   },
   getIdentificationDocumentList() {
     return identificationDocumentList
+  },
+  getRelationshipDegreeListList() {
+    return relationshipDegreeList
+  },
+  getModalitiesList() {
+    return modalitiesList
   },
 }

@@ -1,6 +1,6 @@
 'use client'
 import styles from '@/app/ui/users/users.module.css'
-import '@/app/ui/theme/dx.generic.salvaterra-fight-club-theme.css'
+import '@/app/ui/theme/dx.material.salvaterra-fight-club-theme.css'
 
 import { serviceData } from '@/lib/member-datagrid-seed'
 
@@ -14,16 +14,16 @@ import DataGrid, {
   Form,
   PatternRule,
 } from 'devextreme-react/data-grid'
-import { EmailRule, Item, RequiredRule } from 'devextreme-react/form'
+import {
+  EmailRule,
+  Item,
+  RequiredRule,
+  StringLengthRule,
+} from 'devextreme-react/form'
+import config from 'devextreme/core/config'
+
 import getColumnsDefinition from '@/lib/devExtreme/member-datagrid-columns-definition'
-
-type identificationDocumentTypes =
-  | 'Cartão de Cidadão'
-  | 'Passaporte'
-  | 'Cartão de residência'
-  | 'Outro'
-
-type relationshipDegreeTypes = 'Mãe' | 'Pai' | 'Irmão' | 'Irmã' | 'Avó' | 'Avô'
+import { CheckBox } from 'devextreme-react'
 
 const datepickOptions = {
   displayFormat: 'yyyy-MM-dd',
@@ -47,10 +47,14 @@ const postalCodeOptions = {
   maskInvalidMessage: 'Código postal deve ter o formato correto',
 }
 
+config({
+  editorStylingMode: 'underlined',
+})
+
 const UsersPage = () => {
   return (
     <div suppressHydrationWarning className="dx-viewport p-5">
-      <h1 className="pb-5">Lista de membros</h1>
+      <h4 className="pb-5">Lista de membros</h4>
       <div className={styles.container}>
         <DataGrid
           dataSource={serviceData.getMembers()}
@@ -101,7 +105,7 @@ const UsersPage = () => {
                   isRequired={true}
                   dataField="member.dateOfBirth"
                   editorType="dxDateBox"
-                  editorOptions={datepickOptions}
+                  editorOptions={{ ...datepickOptions, max: new Date() }}
                   label={{ text: 'Data Nascimento', location: 'top' }}
                 />
                 <Item
@@ -190,7 +194,7 @@ const UsersPage = () => {
                   dataField="memberIdentificationDocument.expireDate"
                   label={{ text: 'Data de Validade', location: 'top' }}
                   editorType="dxDateBox"
-                  editorOptions={{ datepickOptions }}
+                  editorOptions={{ ...datepickOptions, min: new Date() }}
                 />
                 <Item
                   isRequired={true}
@@ -200,8 +204,86 @@ const UsersPage = () => {
                   editorOptions={{
                     value: null,
                   }}
+                >
+                  <StringLengthRule
+                    message="NIF deve conter 9 digitos"
+                    min={9}
+                    max={9}
+                  />
+                </Item>
+              </Item>
+              {/* responsavel */}
+              <Item
+                itemType="group"
+                caption="Responsável"
+                colCount={2}
+                colSpan={2}
+              >
+                <Item
+                  dataField="memberGuardian.fullName"
+                  label={{ text: 'Nome Responsável', location: 'top' }}
+                />
+                <Item
+                  dataField="memberGuardian.contact"
+                  label={{ text: 'Nº Telemóvel', location: 'top' }}
+                  editorOptions={phoneNumberOptions}
+                />
+                <Item
+                  dataField="memberGuardian.relationshipDegree_id"
+                  label={{ text: 'Grau de Parentesco', location: 'top' }}
+                  editorType="dxSelectBox"
+                  editorOptions={{
+                    dataSource: serviceData.getRelationshipDegreeListList(),
+                  }}
+                />
+                <Item
+                  dataField="memberGuardian.address"
+                  label={{ text: 'Morada', location: 'top' }}
+                />
+                <Item
+                  dataField="memberGuardian.city"
+                  label={{ text: 'Cidade', location: 'top' }}
+                />
+                <Item
+                  dataField="memberGuardian.county"
+                  label={{ text: 'Concelho', location: 'top' }}
+                />
+                <Item
+                  dataField="memberGuardian.parish"
+                  label={{ text: 'Freguesia', location: 'top' }}
+                />
+                <Item
+                  dataField="memberGuardian.postalCode"
+                  label={{ text: 'Cod. Postal', location: 'top' }}
+                  editorOptions={postalCodeOptions}
                 />
               </Item>
+              {/* Modalidade & Frequência */}
+              <Item
+                itemType="group"
+                caption="Modalidade"
+                colCount={2}
+                colSpan={2}
+              >
+                <Item
+                  dataField="member.modality_id"
+                  label={{
+                    text: 'Modalidades',
+                    location: 'top',
+                  }}
+                  editorType="dxSelectBox"
+                  editorOptions={{
+                    dataSource: serviceData.getModalitiesList(),
+                  }}
+                />
+              </Item>
+              {/* Termos e condições */}
+              <Item
+                itemType="group"
+                caption="Responsável"
+                colCount={2}
+                colSpan={2}
+              ></Item>
             </Form>
           </Editing>
         </DataGrid>
