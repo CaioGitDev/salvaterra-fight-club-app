@@ -36,3 +36,11 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.dx-box-item-content{
+  font-size: 0.875rem !important;
+}
+
+.dx-field-item-label-text {
+  font-size: 0.875rem !important;
+}
