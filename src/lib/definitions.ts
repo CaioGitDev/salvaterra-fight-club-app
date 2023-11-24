@@ -15,6 +15,11 @@ export type Member = {
   contact: string
   email: string
   modality_id: number
+  frequency_id: number
+  memberType_id: number
+  paymentFrequency_id: number
+  termsAndConditions: boolean
+  healthDeclaration: boolean
   createdAt: Date
   updatedAt?: Date
   updatedBy?: string

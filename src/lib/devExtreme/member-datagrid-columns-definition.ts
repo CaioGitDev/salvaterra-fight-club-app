@@ -138,5 +138,43 @@ export default function getColumnsDefinition(serviceData: ServiceDataType) {
         displayExpr: 'text',
       },
     },
+    {
+      dataField: 'member.frequency_id',
+      visible: true,
+      caption: 'Frequência',
+      lookup: {
+        dataSource: serviceData.getFrequenciesList(),
+        valueExpr: 'id',
+        displayExpr: 'text',
+      },
+    },
+    {
+      dataField: 'member.memberType_id',
+      visible: false,
+      caption: 'Tipo de inscrição',
+      lookup: {
+        dataSource: serviceData.getMemeberTypesList(),
+        valueExpr: 'id',
+        displayExpr: 'text',
+      },
+    },
+    {
+      dataField: 'member.paymentFrequency_id',
+      visible: true,
+      caption: 'Periodicidade de pagamentos',
+      lookup: {
+        dataSource: serviceData.getPaymentFrequencyList(),
+        valueExpr: 'id',
+        displayExpr: 'text',
+      },
+    },
+    {
+      dataField: 'member.termsAndConditions',
+      visible: false,
+    },
+    {
+      dataField: 'member.healthDeclaration',
+      visible: false,
+    },
   ]
 }

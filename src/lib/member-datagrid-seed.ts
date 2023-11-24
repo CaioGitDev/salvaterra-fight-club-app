@@ -14,6 +14,11 @@ const membersData: MemberDataInterface[] = [
       contact: '123456789',
       email: 'john.doe@example.com',
       modality_id: 3,
+      frequency_id: 1,
+      paymentFrequency_id: 2,
+      memberType_id: 1,
+      termsAndConditions: true,
+      healthDeclaration: true,
       createdAt: new Date('2022-01-01'),
       updatedAt: new Date('2022-02-15'),
       updatedBy: 'admin',
@@ -65,6 +70,11 @@ const membersData: MemberDataInterface[] = [
       contact: '987654321',
       email: 'alice.smith@example.com',
       modality_id: 2,
+      frequency_id: 2,
+      paymentFrequency_id: 3,
+      memberType_id: 2,
+      termsAndConditions: true,
+      healthDeclaration: true,
       createdAt: new Date('2022-01-05'),
       updatedAt: new Date('2022-02-20'),
       updatedBy: 'admin',
@@ -212,6 +222,47 @@ const modalitiesList: OptionLists[] = [
   },
 ]
 
+const frequencyList: OptionLists[] = [
+  {
+    id: 1,
+    text: '3x Semana',
+  },
+  {
+    id: 2,
+    text: '5x Semana',
+  },
+]
+
+const memberTypeList: OptionLists[] = [
+  {
+    id: 1,
+    text: 'Normal',
+  },
+  {
+    id: 2,
+    text: 'Estudante',
+  },
+  {
+    id: 3,
+    text: 'Família',
+  },
+]
+
+const paymentFrequencyList: OptionLists[] = [
+  {
+    id: 1,
+    text: 'Mensal',
+  },
+  {
+    id: 2,
+    text: 'Trimestral',
+  },
+  {
+    id: 3,
+    text: 'Anual',
+  },
+]
+
 export type ServiceDataType = {
   getMembers(): MemberDataInterface[]
   getGengerList(): OptionLists[]
@@ -219,6 +270,9 @@ export type ServiceDataType = {
   getIdentificationDocumentList(): OptionLists[]
   getRelationshipDegreeListList(): OptionLists[]
   getModalitiesList(): OptionLists[]
+  getFrequenciesList(): OptionLists[]
+  getMemeberTypesList(): OptionLists[]
+  getPaymentFrequencyList(): OptionLists[]
 }
 
 export const serviceData: ServiceDataType = {
@@ -239,5 +293,14 @@ export const serviceData: ServiceDataType = {
   },
   getModalitiesList() {
     return modalitiesList
+  },
+  getFrequenciesList() {
+    return frequencyList
+  },
+  getMemeberTypesList() {
+    return memberTypeList
+  },
+  getPaymentFrequencyList() {
+    return paymentFrequencyList
   },
 }

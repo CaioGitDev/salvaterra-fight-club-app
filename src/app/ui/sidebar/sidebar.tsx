@@ -28,7 +28,7 @@ const menuItems = [
       {
         id: randomUUID(),
         title: 'Membros',
-        path: '/users',
+        path: '/members',
         icon: <MdSupervisedUserCircle />,
       },
       {
