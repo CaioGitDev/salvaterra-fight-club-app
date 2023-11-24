@@ -1,5 +1,5 @@
 'use client'
-
+import '@/app/ui/theme/dx.material.salvaterra-fight-club-theme.css'
 import { serviceData } from '@/lib/member-datagrid-seed'
 
 import DataGrid, {
@@ -22,6 +22,9 @@ import {
 import config from 'devextreme/core/config'
 
 import getColumnsDefinition from '@/lib/devExtreme/member-datagrid-columns-definition'
+import { useEffect, useRef, useState } from 'react'
+import { MemberDataInterface } from '@/lib/definitions'
+import DataSource from 'devextreme/data/data_source'
 
 const datepickOptions = {
   displayFormat: 'yyyy-MM-dd',
@@ -50,14 +53,27 @@ config({
 })
 
 const MembersDataGrid = () => {
+  const [gridDataSource, setGridDataSource] =
+    useState<DataSource<MemberDataInterface, string>>()
+  const gridRef = useRef<DataGrid>(null)
+
+  useEffect(() => {
+    setGridDataSource(
+      new DataSource({
+        key: 'member.id',
+        load: () => serviceData.getMembers(),
+      }),
+    )
+  }, [])
+
   return (
     <div suppressHydrationWarning className="dx-viewport p-5">
       <DataGrid
-        dataSource={serviceData.getMembers()}
-        keyExpr="member.id"
+        dataSource={gridDataSource}
         showBorders={true}
         height={700}
         defaultColumns={getColumnsDefinition(serviceData)}
+        ref={gridRef}
       >
         <FilterRow visible={true} />
         <HeaderFilter visible={true} />
