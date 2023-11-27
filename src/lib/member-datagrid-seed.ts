@@ -103,6 +103,63 @@ const membersData: MemberDataInterface[] = [
   },
 ]
 
+export const memberDataDefault: MemberDataInterface = {
+  member: {
+    id: '',
+    membershipNumber: 0,
+    photoUrl: '',
+    fullName: '',
+    gender_id: 0,
+    dateOfBirth: new Date(),
+    nationality_id: 0,
+    placeOfBirth: '',
+    contact: '',
+    email: '',
+    modality_id: 0,
+    frequency_id: 0,
+    paymentFrequency_id: 0,
+    memberType_id: 0,
+    termsAndConditions: false,
+    healthDeclaration: false,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    updatedBy: '',
+    active: true,
+  },
+  memberIdentificationDocument: {
+    id: '',
+    member_id: '',
+    identificationDocument_id: 0,
+    identificationNumber: '',
+    expireDate: new Date(),
+    taxIdentificationNumber: 0,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    updatedBy: '',
+  },
+  memberAddress: {
+    id: '',
+    member_id: '',
+    address: '',
+    city: '',
+    county: '',
+    parish: '',
+    postalCode: '',
+  },
+  memberGuardian: {
+    id: '',
+    member_id: '',
+    fullName: '',
+    contact: '',
+    relationshipDegree_id: 0,
+    address: '',
+    city: '',
+    county: '',
+    parish: '',
+    postalCode: '',
+  },
+}
+
 const gengerList: OptionLists[] = [
   {
     id: 1,
