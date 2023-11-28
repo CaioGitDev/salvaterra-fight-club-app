@@ -1,0 +1,3 @@
+.form-popup-buttons-container {
+  @apply flex items-center pl-5 pr-5
+}
