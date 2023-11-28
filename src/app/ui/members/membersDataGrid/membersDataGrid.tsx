@@ -20,34 +20,11 @@ import config from 'devextreme/core/config'
 import getColumnsDefinition from '@/lib/devExtreme/member-datagrid-columns-definition'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { MemberDataInterface } from '@/lib/definitions'
-import DataSource from 'devextreme/data/data_source'
 import CustomStore from 'devextreme/data/custom_store'
 import Button from 'devextreme-react/button'
-import Popup from 'devextreme-react/popup'
 import MembersPopup from '@/components/members-popup/membersPopup'
 import notify from 'devextreme/ui/notify'
-
-const datepickOptions = {
-  displayFormat: 'yyyy-MM-dd',
-  openOnFieldClick: true,
-  pickerType: 'calendar',
-}
-
-const phoneNumberOptions = {
-  mask: '+351 000000000',
-  maskRules: {
-    X: /^\+3519[1236]\d{7}$/,
-  },
-  maskInvalidMessage: 'Número de telemovel deve ter o formato correto',
-}
-
-const postalCodeOptions = {
-  mask: '0000-000',
-  maskRules: {
-    X: /^\d{4}-\d{3}$/,
-  },
-  maskInvalidMessage: 'Código postal deve ter o formato correto',
-}
+import MemberNewForm from '@/components/library/member-new-form/memberNewForm'
 
 config({
   editorStylingMode: 'underlined',
@@ -61,11 +38,12 @@ const MembersDataGrid = () => {
   const [isPanelOpened, setPanelOpened] = useState(false)
   const [memberId, setMemberId] = useState<string>('')
   const [popupVisible, setPopupVisible] = useState(false)
-  const [formDataDefaults, setFormDataDefaults] = useState('')
+  const [formDataDefaults, setFormDataDefaults] =
+    useState<MemberDataInterface>()
   const gridRef = useRef<DataGrid>(null)
 
   const handleNewMemberClick = useCallback(() => {
-    console.log('handleNewMemberClick')
+    setFormDataDefaults(undefined)
     setPopupVisible(true)
   }, [])
 
@@ -76,7 +54,8 @@ const MembersDataGrid = () => {
   const handleOnRowClick = useCallback(
     ({ data }: DataGridTypes.RowClickEvent) => {
       setMemberId(data.id)
-      setPanelOpened(true)
+      setFormDataDefaults(data)
+      setPopupVisible(true)
     },
     [],
   )
@@ -164,7 +143,9 @@ const MembersDataGrid = () => {
         visible={popupVisible}
         setVisible={changePopupVisibility}
         onSave={handleOnSaveClick}
-      ></MembersPopup>
+      >
+        <MemberNewForm data={formDataDefaults}></MemberNewForm>
+      </MembersPopup>
     </div>
   )
 }

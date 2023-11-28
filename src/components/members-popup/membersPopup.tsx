@@ -1,8 +1,8 @@
-import { Popup, ValidationGroup } from 'devextreme-react'
-import { ToolbarItem } from 'devextreme-react/popup'
-import Button from 'devextreme-react/button'
+'use client'
+import { ScrollView, ValidationGroup } from 'devextreme-react'
+import { Popup, ToolbarItem } from 'devextreme-react/popup'
 import { PropsWithChildren, useCallback, useRef } from 'react'
-import { useScreenSize } from '@/utils/quedia-query'
+import NoSSRWraper from '../no-ssr-wrapper/noSSRWraper'
 
 type PopupProps = {
   title: string
@@ -24,7 +24,6 @@ const MembersPopup = ({
   isSaveDisabled = false,
   children,
 }: PropsWithChildren<PopupProps>) => {
-  const { isXSmall } = useScreenSize()
   const validationGroup = useRef<ValidationGroup>(null)
 
   const close = () => {
@@ -44,39 +43,39 @@ const MembersPopup = ({
   }, [validationGroup])
 
   return (
-    <Popup
-      title={title}
-      visible={visible}
-      fullScreen={isXSmall}
-      width="90vw"
-      height="90vh"
-      wrapperAttr={{
-        ...wrapperAttr,
-        class: `${wrapperAttr?.class} form-popup`,
-      }}
-    >
-      <ToolbarItem toolbar="bottom" location="center">
-        <div
-          className={`form-popup-buttons-container ${
-            width <= 360 ? 'flex-buttons' : ''
-          }`}
-        >
-          <Button
-            text="Cancel"
-            stylingMode="contained"
-            onClick={onCancelClick}
-          />
-          <Button
-            text="Save"
-            stylingMode="contained"
-            type="default"
-            disabled={isSaveDisabled}
-            onClick={onSaveClick}
-          />
-        </div>
-      </ToolbarItem>
-      <ValidationGroup ref={validationGroup}>{children}</ValidationGroup>
-    </Popup>
+    <NoSSRWraper>
+      <Popup
+        title={title}
+        visible={visible}
+        width="90vw"
+        height="90vh"
+        wrapperAttr={{
+          ...wrapperAttr,
+          class: `${wrapperAttr?.class} form-popup`,
+        }}
+      >
+        <ToolbarItem
+          widget="dxButton"
+          toolbar="bottom"
+          location="after"
+          options={{ text: 'Cancelar', type: 'normal', onClick: onCancelClick }}
+        />
+        <ToolbarItem
+          widget="dxButton"
+          toolbar="bottom"
+          location="after"
+          options={{
+            text: 'Salvar',
+            stylingMode: 'contained',
+            type: 'default',
+            onClick: onSaveClick,
+          }}
+        />
+        <ScrollView>
+          <ValidationGroup ref={validationGroup}>{children}</ValidationGroup>
+        </ScrollView>
+      </Popup>
+    </NoSSRWraper>
   )
 }
 
